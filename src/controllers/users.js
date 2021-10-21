@@ -2,10 +2,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.js");
 
-exports.login = function (req, res) {
+exports.login = function(req, res) {
     const userLoggingIn = req.body;
 
-    User.findOne({ username: userLoggingIn.username })
+    User.findOne({ username: userLoggingIn.username.toLowerCase() })
         .then((dbUser) => {
             if (!dbUser) {
                 return res.json({ message: "Invalid Username or Password"});
@@ -39,6 +39,61 @@ exports.login = function (req, res) {
                         })
                     }
                 })
+                .catch((err) => {
+                    console.log(err);
+                    return res.json({ message: "An error has occurred. Please try again" });
+                })
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.json({ message: "An error has occurred. Please try again" });
         })
 }
 
+exports.register = function(req, res) {
+    const userInfo = req.body;
+
+    User.findOne({ username: userInfo.username })
+        .then((user) => {
+            if(!user) {
+                User.findOne({ employeeNum: userInfo.employeeNum })
+                    .then((user) => {
+                        if(!user) {
+                            bcrypt.hash(userInfo.password, 10)
+                                .then((pass) => {
+                                    const dbUser = new User({
+                                        employeeNum: userInfo.employeeNum,
+                                        username: userInfo.username,
+                                        password: pass,
+                                        fName: userInfo.fName,
+                                        lName: userInfo.lName,
+                                        role: userInfo.role,
+                                        store: Number(userInfo.store)
+                                    });
+                                    
+                                    dbUser.save(function(err, user) {
+                                        if(err) return console.log(err);
+                                    })
+                                    return res.json({message: "Success"});
+                                })
+                        } else {
+                            return res.json({ message: "Account with username or employee number already exists"});
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        return res.json({ message: "An error has occurred. Please try again" });
+                    })
+            } else {
+                return res.json({ message: "Account with username or employee number already exists"});
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.json({ message: "An error has occurred. Please try again" });
+        })
+}
+
+exports.logout = function(req, res) {
+    res.send("NOT IMPLEMENTED YET");
+}
