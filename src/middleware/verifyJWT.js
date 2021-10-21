@@ -1,8 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 exports.verifyJWT = function(req, res, next) {
-    const token = req.headers["x-access-token"]?.split(' ')[1];
-
+    const token = req.headers.jwt_token?.split(': ')[0].split('; ')[0];
     if (token) {
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if (err) return res.json({
