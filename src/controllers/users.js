@@ -78,7 +78,7 @@ exports.register = function(req, res) {
                                         store: Number(userInfo.store)
                                     });
                                     
-                                    dbUser.save(function(err, user) {
+                                    dbUser.save(function(err) {
                                         if(err) return console.log(err);
                                     })
                                     return res.json({message: "Success"});

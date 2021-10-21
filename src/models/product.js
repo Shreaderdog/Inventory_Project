@@ -17,10 +17,10 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    stock: [{
-        store: Number,
-        storeStock: Number
-    }]
+    stock: {
+        type: Map,
+        of: Number
+    }
 });
 
 const Product = mongoose.model("Product", productSchema);
