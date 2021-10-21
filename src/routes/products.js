@@ -3,11 +3,11 @@ const router = express.Router();
 
 const prodController = require("../controllers/products.js");
 const verifyJWT = require("../middleware/verifyJWT.js");
-const verifyRole = require("../middleware/verifyRole.js");
+const verifyStore = require("../middleware/verifyStore.js");
 
-router.get("/store:id", verifyJWT, verifyRole, prodController.getItems); //id is req.params.id
-router.post("/additem", verifyJWT, verifyRole, prodController.addItem);
-router.patch("/edititem:id", verifyJWT, verifyRole, prodController.editItem);
-router.delete("removeitem:id", verifyJWT, verifyRole, prodController.removeItem);
+router.get("/store:storeid", verifyJWT.verifyJWT, verifyStore.verifyStore, prodController.getItems); //storeid is req.params.storeid
+router.post("/additem", verifyJWT.verifyJWT, prodController.addItem);
+router.patch("/edititem:id", verifyJWT.verifyJWT, prodController.editItem);
+router.delete("removeitem:id", verifyJWT.verifyJWT, prodController.removeItem);
 
 module.exports = router;
