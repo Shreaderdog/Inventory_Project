@@ -26,11 +26,18 @@ exports.login = function(req, res) {
                             process.env.JWT_SECRET,
                             {expiresIn: 3600},
                             (err, token) => {
-                                if (err) return res.json({ message: err})
-                                return res.json({
-                                    message: "Success",
-                                    token: "Bearer " + token
-                                })
+                                if (err) {
+                                    return res.json({ message: err})
+                                } else {
+                                
+                                res.cookie('jwt_token', token, {
+                                    expires: new Date(Date.now() + 3 * 3600000),  //expires in 3 hours
+                                    httpOnly: true,
+                                    secure: process.env.production,
+                                    sameSite: 'strict'
+                                 })
+                                 res.send();   
+                                }
                             }
                         )
                     } else {

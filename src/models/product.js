@@ -21,4 +21,8 @@ const productSchema = mongoose.Schema({
         store: Number,
         storeStock: Number
     }]
-})
+});
+
+const Product = mongoose.model("Product", productSchema);
+
+module.exports = Product;
