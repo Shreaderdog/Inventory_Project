@@ -88,5 +88,17 @@ exports.editItem = function(req, res) {
 }
 
 exports.removeItem = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+    const inputProd = req.body;
+    if (inputProd.prodNumber) {
+        Product.deleteOne({ prodNumber: inputProd.prodNumber })
+            .then((result, err) =>{
+                if (result) {
+                    res.send(result);
+                } else {
+                    res.send(err);
+                }
+            })
+    } else {
+        return res.json({message: "Product with that product number not found"});
+    }
 }
