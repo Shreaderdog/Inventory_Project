@@ -102,5 +102,7 @@ exports.register = function(req, res) {
 }
 
 exports.logout = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+    res.clearCookie("jwt_token");
+    res.json({ message: "Logged out successfuly", isLoggedIn: false});
+    res.send();
 }

@@ -17,6 +17,6 @@ exports.verifyJWT = function(req, res, next) {
             next();
         })
     } else {
-        res.json({ message: "Incorrect token given", isLoggedIn: false})
+        return res.json({ message: "Incorrect token given", isLoggedIn: false})
     }
 }
