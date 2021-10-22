@@ -73,15 +73,10 @@ exports.editItem = function(req, res) {
                 if (inputProd.stocks) {
                     let stockarray = inputProd.stocks.replace(/[^0-9\.]+/g, ""); //remove anything that isnt number
                     let i = 0;
-                    let adjustment = 0;
-                    let original = 0;
-                    let newnum = 0;
                     for (const key of prod.stock.keys()) {
                         adjustment = Number(stockarray[i]);
-                        original = Number(prod.stock.get(key));
-                        newnum = original + adjustment;
                         if (adjustment != 0) {
-                            prod.stock.set(key, newnum);
+                            prod.stock.set(key, adjustment);
                         }
                         i++;
                     }
