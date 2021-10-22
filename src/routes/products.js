@@ -7,7 +7,7 @@ const verifyStore = require("../middleware/verifyStore.js");
 
 router.get("/store:storeid", verifyJWT.verifyJWT, verifyStore.verifyStore, prodController.getItems); //storeid is req.params.storeid
 router.post("/additem", verifyJWT.verifyJWT, prodController.addItem);
-router.patch("/edititem:id", verifyJWT.verifyJWT, prodController.editItem);
+router.patch("/edititem", verifyJWT.verifyJWT, prodController.editItem);
 router.delete("removeitem:id", verifyJWT.verifyJWT, prodController.removeItem);
 
 module.exports = router;
