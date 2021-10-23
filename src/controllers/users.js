@@ -2,10 +2,18 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.js");
 
-exports.login = function(req, res) {
-    const userLoggingIn = req.body;
 
-    User.findOne({ username: userLoggingIn.username.toLowerCase() })
+exports.auth = function(req, res) {
+    return res.json({
+        isLoggedIn: true
+    });
+}
+
+exports.login = function(req, res) {
+    console.log(req.body);
+    const userLoggingIn = req.body.user;
+
+    User.findOne({ username: userLoggingIn.username })
         .then((dbUser) => {
             if (!dbUser) {
                 return res.json({ message: "Invalid Username or Password"});
@@ -30,13 +38,15 @@ exports.login = function(req, res) {
                                     return res.json({ message: err})
                                 } else {
                                 
-                                res.cookie('jwt_token', token, {
-                                    expires: new Date(Date.now() + 3 * 3600000),  //expires in 3 hours
-                                    httpOnly: true,
-                                    secure: process.env.production,
-                                    sameSite: 'strict'
-                                 })
-                                 res.send();   
+                                    res.cookie('jwt_token', token, {
+                                        expires: new Date(Date.now() + 3 * 3600000),  //expires in 3 hours
+                                        httpOnly: true,
+                                        secure: process.env.production,
+                                        sameSite: 'strict'
+                                    });
+                                
+                                    res.json({isLoggedIn: true});
+                                    res.send();   
                                 }
                             }
                         )
