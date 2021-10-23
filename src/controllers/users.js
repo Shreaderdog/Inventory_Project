@@ -67,6 +67,25 @@ exports.login = function(req, res) {
         })
 }
 
+exports.getInfo = function(req, res) {
+    console.log("test");
+    User.findOne({ username: req.user.username })
+        .then((user) => {
+            if(!user) {
+                return res.json({ message: "An error occurred"});
+            } else {
+                res.json({
+                    username: user.username,
+                    role: user.role,
+                    store: user.store,
+                    fName: user.fName,
+                    lName: user.lName
+                })
+                res.send();
+            }
+        })
+}
+
 exports.register = function(req, res) {
     const userInfo = req.body;
 

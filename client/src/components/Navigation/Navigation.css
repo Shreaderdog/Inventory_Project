@@ -1,0 +1,13 @@
+.navbarstyle {
+    background-color: "green";
+    font-size: "20px";
+    color: "white";
+    border-bottom: "1px solid black";
+    text-align: "center";
+    padding: "20px";
+    position: "fixed";
+    left: "0";
+    top: "0";
+    height: "60px";
+    width: "100%"
+}
