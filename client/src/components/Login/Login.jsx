@@ -41,7 +41,7 @@ export default function Login() {
     return (
         <Container>
             <h1 className="title">Misfit Inventory Management System</h1>
-            <Form className="Login" style={{boxShadow: "1px 1px 1px 1px lightGrey", borderRadius: "10px"}}>
+            <Form className="Login align-middle" style={{boxShadow: "1px 1px 1px 1px lightGrey", borderRadius: "10px"}}>
             
             <h2 className="text-center">Welcome</h2>
             <Form.Group>
@@ -52,7 +52,7 @@ export default function Login() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control onChange={e => setState(prevState =>{{return {username: prevState.username, password: e.target.value}}})} type="password" placeholder="password" style={{boxShadow: "1px 1px 1px 1px lightGrey", borderRadius: "10px"}}/>
             </Form.Group>
-            <Button className="btn btn-lg w-100" style={{marginTop: "8px"}} onClick={handleLogin}>Log in</Button>
+            <Button className="btn btn-lg w-100" style={{marginTop: "8px", background: "green"}} onClick={handleLogin}>Log in</Button>
         </Form>
         <Footer />
         </Container>

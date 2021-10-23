@@ -3,7 +3,9 @@ const Product = require("../models/product.js");
 exports.getItems = function(req, res) {
     Product.find()
         .then((allItems) => {
+            console.log(req.params.storeid)
             if(req.params.storeid == "all") {
+                console.log(allItems)
                 return res.json(allItems);
             } else {
                 let allParsedItems = [];

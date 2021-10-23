@@ -6,7 +6,7 @@ function Footer() {
         color: "white",
         borderTop: "1px solid black",
         textAlign: "center",
-        paddint: "20px",
+        padding: "20px",
         position: "fixed",
         left: "0",
         bottom: "0",
