@@ -1,9 +1,16 @@
 import { useEffect } from 'react';
+import Navigation from '../Navigation/Navigation';
+import Container from "react-bootstrap/Container";
+import Footer from "../Footer/Footer";
 
-export default function Dashboard() {
+function Dashboard() {
     return(
-        <div>
-            <p>Dashboard</p>
-        </div>
+            <Container>
+                <Navigation/>
+                <Footer />
+            </Container>
     );
 }
+
+
+export default Dashboard;
