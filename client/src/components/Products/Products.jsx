@@ -22,7 +22,6 @@ export default class Products extends Component {
                             store: res.data.store
                         }
                     });
-                    console.log(this.state.perms.role)
                 }
                 if (this.state.perms.role == "owner"){
                     API.get('/products/storeall', {withCredentials: true})
@@ -30,13 +29,12 @@ export default class Products extends Component {
                             this.setState({
                                 items: res.data
                             })
-                            console.log(this.state.items)
                         })
                 } else {
                     API.get(`/products/store${this.state.perms.store}`, {withCredentials: true})
                         .then(res => {
                             this.setState({
-                                items: res
+                                items: res.data
                             })
                         })
                 }
