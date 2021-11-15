@@ -1,3 +1,5 @@
+// user.js
+// User Model
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
@@ -23,7 +25,7 @@ const userSchema = mongoose.Schema({
     },
     role: {
         type:String,
-        rquired: true
+        required: true
     },
     store: {
         type: Number,

@@ -1,3 +1,4 @@
+// verifyJWT.js
 const jwt = require("jsonwebtoken");
 
 exports.verifyJWT = function(req, res, next) {

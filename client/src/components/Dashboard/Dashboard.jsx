@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// Dashboard.jsx
 import Navigation from '../Navigation/Navigation';
 import Container from "react-bootstrap/Container";
 import Footer from "../Footer/Footer";

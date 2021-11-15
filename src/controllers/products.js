@@ -1,3 +1,4 @@
+// products.js
 const Product = require("../models/product.js");
 
 exports.getItems = function(req, res) {

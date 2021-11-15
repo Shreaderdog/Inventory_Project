@@ -1,3 +1,5 @@
+// product.js
+// Product Model
 const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema({
