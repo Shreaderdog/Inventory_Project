@@ -1,3 +1,4 @@
+// App.js
 import {Switch, BrowserRouter, Route, Redirect} from 'react-router-dom';
 import Login from './components/Login/Login';
 import Dashboard from './components/Dashboard/Dashboard';

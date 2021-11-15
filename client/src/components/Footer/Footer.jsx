@@ -1,4 +1,4 @@
-
+// Footer.jsx
 function Footer() {
     const footerStyle = {
         backgroundColor: "green",

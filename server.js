@@ -1,3 +1,4 @@
+// server.js
 // imports
 const express = require("express");  // express for routes
 const mongoose = require("mongoose");  // mongoose for db access
