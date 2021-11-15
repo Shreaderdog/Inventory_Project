@@ -22,7 +22,6 @@ export default class Products extends Component {
                             store: res.data.store
                         }
                     });
-                    console.log(this.state.perms.role)
                 }
                 if (this.state.perms.role == "owner"){
                     API.get('/products/storeall', {withCredentials: true})
@@ -30,13 +29,12 @@ export default class Products extends Component {
                             this.setState({
                                 items: res.data
                             })
-                            console.log(this.state.items)
                         })
                 } else {
                     API.get(`/products/store${this.state.perms.store}`, {withCredentials: true})
                         .then(res => {
                             this.setState({
-                                items: res
+                                items: res.data
                             })
                         })
                 }
@@ -51,7 +49,7 @@ export default class Products extends Component {
             <Container fluid className="h-100 w-100">
                 <div className="row align-items-center">
                     <div className = "col align-self-center">
-                        <h1 style={{textAlign: "center"}}> Select a tab above to get started</h1>
+                        <h1 style={{textAlign: "center"}}> Still implementing the products and product components</h1>
                     </div>
                 </div>
             </Container>
