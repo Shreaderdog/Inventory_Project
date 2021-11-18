@@ -5,10 +5,7 @@ exports.getItems = function(req, res) {
     Product.find()
         .then((allItems) => {
             console.log(req.params.storeid)
-            if(req.params.storeid == "all") {
-                console.log(allItems)
-                return res.json(allItems);
-            } else {
+            console.log(allItems)
                 let allParsedItems = [];
                 for(let i = 0; i < allItems.length; i++) {
                     let parsedItem = {
@@ -21,7 +18,6 @@ exports.getItems = function(req, res) {
                     allParsedItems.push(parsedItem);
                 }
                 return res.json(allParsedItems);
-            }
         })
 }
 
