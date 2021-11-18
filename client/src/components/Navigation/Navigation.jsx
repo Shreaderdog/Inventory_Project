@@ -8,7 +8,7 @@ import './Navigation.css';
 const Navigation = () => {
 
     const history = useHistory();
-    const [state, setState] = useState({username: "jdoe", fname: "john", lname: "doe", store: "1", role: "employee"});
+    const [state, setState] = useState({username: "jdoe", fname: "john", lname: "doe", store: "0", role: "employee"});
 
     async function logout() {
         API.delete('/users/logout');
@@ -26,7 +26,6 @@ const Navigation = () => {
                         role: res.data.role,
                         store: res.data.store
                     });
-                    console.log("test")
                 }
             })
     }, [])
