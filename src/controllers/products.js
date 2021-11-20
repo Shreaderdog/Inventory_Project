@@ -53,13 +53,16 @@ exports.addItem = function(req, res) {
 }
 
 exports.editItem = function(req, res) {
-    const inputProd = req.body;
+    const inputProd = req.body.item;
 
     Product.findOne({ prodNumber: inputProd.prodNumber })
         .then((prod) => {
             if(!prod) {
                 return res.json({message: "product with that product number does not exist"});
             } else {
+                console.log(prod)
+                console.log(inputProd)
+                store = req.body.store;
                 if (inputProd.prodName) {
                     prod.prodName = inputProd.prodName;
                 }
@@ -69,17 +72,10 @@ exports.editItem = function(req, res) {
                 if (inputProd.unitAmount) {
                     prod.unitAmount = inputProd.unitAmount;
                 }
-                if (inputProd.stocks) {
-                    let stockarray = inputProd.stocks.replace(/[^0-9\.]+/g, ""); //remove anything that isnt number
-                    let i = 0;
-                    for (const key of prod.stock.keys()) {
-                        adjustment = Number(stockarray[i]);
-                        if (adjustment != 0) {
-                            prod.stock.set(key, adjustment);
-                        }
-                        i++;
-                    }
+                if (inputProd.stock) {
+                    prod.stock.set(store.toString(), inputProd.stock)
                 }
+                
                 prod.save();
             }
             return res.json({message: "Successfully edited item"});
