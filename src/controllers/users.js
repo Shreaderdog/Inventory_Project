@@ -43,7 +43,8 @@ exports.login = function(req, res) {
                                         expires: new Date(Date.now() + 3 * 3600000),  //expires in 3 hours
                                         httpOnly: true,
                                         secure: process.env.production,
-                                        sameSite: 'strict'
+                                        sameSite: 'strict',
+                                        overwrite: true
                                     });
                                 
                                     res.json({isLoggedIn: true});
@@ -73,7 +74,8 @@ exports.getInfo = function(req, res) {
     User.findOne({ username: req.user.username })
         .then((user) => {
             if(!user) {
-                return res.json({ message: "An error occurred"});
+                res.json({ message: "An error occurred"});
+                res.send();
             } else {
                 res.json({
                     username: user.username,
@@ -132,7 +134,6 @@ exports.register = function(req, res) {
 }
 
 exports.logout = function(req, res) {
-    res.clearCookie("jwt_token");
-    res.json({ message: "Logged out successfuly", isLoggedIn: false});
+    res.clearCookie('jwt_token', {domain: '', path: '/'});
     res.send();
 }

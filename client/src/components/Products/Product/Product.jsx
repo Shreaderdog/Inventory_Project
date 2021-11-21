@@ -8,6 +8,7 @@ export default class Product extends Component {
     constructor(props) {
         super(props);
         this.state={role: props.propperm.role, store: props.propperm.store, item: props.propitem}
+        console.log(this.state.store)
     }
 
     handlenameupdate(e) {
@@ -17,6 +18,7 @@ export default class Product extends Component {
             let item = Object.assign({}, middleman);
             return { item };
         })
+        console.log(this.state.item)
     }
 
     handlepriceupdate(e) {
@@ -38,9 +40,10 @@ export default class Product extends Component {
     }
 
     sendupdate() {
-        console.log(this.state.item)
-        API.patch('products/edititem', this.state,{withCredentials: true})
-            .then(res => {console.log(res)})
+        API.patch('/products/edititem', this.state, {withCredentials: true})
+            .then(res => {
+                console.log(res)
+            })
     }
 
     render() {

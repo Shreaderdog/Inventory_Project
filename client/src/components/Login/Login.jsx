@@ -32,7 +32,6 @@ export default function Login() {
         API.post('users/auth', {x}, {withCredentials: true})
         .then(res =>{
             console.log(res);
-            console.log(res.data.isLoggedIn);
             if(res.data.isLoggedIn) {
                 history.push("/dashboard");
             }

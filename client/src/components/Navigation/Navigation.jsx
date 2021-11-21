@@ -11,8 +11,12 @@ const Navigation = () => {
     const [state, setState] = useState({username: "jdoe", fname: "john", lname: "doe", store: "0", role: "employee"});
 
     async function logout() {
-        API.delete('/users/logout');
-        await history.push('/login');
+        API.delete('/users/logout', {withCredentials: true})
+            .then(res => {
+                console.log(res)
+                history.push('/login')
+            })
+
     }
 
     useEffect(() => {
@@ -36,10 +40,14 @@ const Navigation = () => {
             <Navbar.Brand href="/dashboard">Misfits Inventory Management</Navbar.Brand>
                 <Nav className="me-auto">
                 <Nav.Link style={{color: "green"}} href="/dashboard">Dashboard</Nav.Link>
-                <Nav.Link style={{color: "green"}} href="/products">Store {state.store}</Nav.Link>
+                {state.role == "owner"
+                ? <><Nav.Link style={{color: "green"}} href="/products:1">Store 1</Nav.Link>
+                  <Nav.Link style={{color: "green"}} href="/products:2">Store 2</Nav.Link>
+                  <Nav.Link style={{color: "green"}} href="/products:3">Store 3</Nav.Link></>:
+                <Nav.Link style={{color: "green"}} href={"/products:" + state.store}>Store {state.store}</Nav.Link>}
                 {state.role == "owner"
                 ? <Nav.Link href="/register">Register User</Nav.Link>: null}
-                <Nav.Link style={{position: "fixed", right: "30px", color: "green"}} href="/login" onClick={logout}>Logout</Nav.Link>
+                <Nav.Link style={{position: "fixed", right: "30px", color: "green"}} onClick={logout}>Logout</Nav.Link>
             </Nav>
             </Container>
         </Navbar>
