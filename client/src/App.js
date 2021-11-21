@@ -14,7 +14,7 @@ function App() {
         <Route exact path ='/'>
           <Redirect to='/login'/>
         </Route>
-        <Route component={Products} exact path='/products'/>
+        <Route component={Products} exact path='/products:id'/>
         <Route component={Dashboard} exact path='/dashboard'/>
         <Route component={Login} exact path='/login'/>
       </Switch>

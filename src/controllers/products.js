@@ -53,7 +53,9 @@ exports.addItem = function(req, res) {
 }
 
 exports.editItem = function(req, res) {
+    console.log(req.body)
     const inputProd = req.body.item;
+    console.log(inputProd)
 
     Product.findOne({ prodNumber: inputProd.prodNumber })
         .then((prod) => {
