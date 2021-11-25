@@ -11,7 +11,6 @@ exports.auth = function(req, res) {
 }
 
 exports.login = function(req, res) {
-    console.log(req.body);
     const userLoggingIn = req.body.user;
 
     User.findOne({ username: userLoggingIn.username })
@@ -90,7 +89,7 @@ exports.getInfo = function(req, res) {
 }
 
 exports.register = function(req, res) {
-    const userInfo = req.body;
+    const userInfo = req.body.user;
 
     User.findOne({ username: userInfo.username })
         .then((user) => {

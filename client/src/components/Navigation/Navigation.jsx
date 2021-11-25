@@ -43,10 +43,10 @@ const Navigation = () => {
                 {state.role == "owner"
                 ? <><Nav.Link style={{color: "green"}} href="/products:1">Store 1</Nav.Link>
                   <Nav.Link style={{color: "green"}} href="/products:2">Store 2</Nav.Link>
-                  <Nav.Link style={{color: "green"}} href="/products:3">Store 3</Nav.Link></>:
+                  <Nav.Link style={{color: "green"}} href="/products:3">Store 3</Nav.Link>
+                  <Nav.Link style={{color: "green"}} href="/additem">Add Items</Nav.Link>
+                  <Nav.Link style={{color: "green"}} href="/register">Register User</Nav.Link></>:
                 <Nav.Link style={{color: "green"}} href={"/products:" + state.store}>Store {state.store}</Nav.Link>}
-                {state.role == "owner"
-                ? <Nav.Link href="/register">Register User</Nav.Link>: null}
                 <Nav.Link style={{position: "fixed", right: "30px", color: "green"}} onClick={logout}>Logout</Nav.Link>
             </Nav>
             </Container>
