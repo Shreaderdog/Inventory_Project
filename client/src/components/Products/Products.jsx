@@ -21,8 +21,9 @@ class Products extends Component {
             .then(res => {
                 if (res.data.role) {
                     this.setState(prevState => {
+                        let x = prevState.perms.store;
                         let perms = {
-                            store: prevState.perms.store,
+                            store: x,
                             role: res.data.role,
                             userstore: res.data.store
                         }
@@ -40,7 +41,7 @@ class Products extends Component {
                 
             }
 
-    updateData() {
+    updateData = () => {
         API.get(`products/store${this.state.perms.store}`, {withCredentials:true})
             .then(res => {
                 this.setState({
@@ -52,18 +53,18 @@ class Products extends Component {
     render() {
         return (
             <>
-            {this.state.perms.userstore == this.state.store || this.state.perms.role == "owner" ?
+            {this.state.perms.userstore == this.state.perms.store || this.state.perms.role == "owner" ?
                 <>
                 <Navigation />
                 <Container fluid className="h-100 w-100 centered ">
                     <div className="row align-items-center">
                         <div className = "mt-4 col align-self-center border border-secondary rounded-2 border-3">
-                            {this.state.items.map((item, i) => <Product key={i} propitem={item} propfunc = {this.updateData} propperm={this.state.perms}/>)}
+                            {this.state.items.map((item, i) => <Product key={i} propitem={item} propfunc={this.updateData} propperm={this.state.perms}/>)}
                         </div>
                     </div>
                 </Container>
                 <Footer />
-            </>: <p>Sorry, you are not allowed to access this store</p>}
+            </>: <><Navigation /><p>Sorry, you are not allowed to access this store</p><Footer /></>}
         </>
         );
     }

@@ -22,7 +22,7 @@ exports.getItems = function(req, res) {
 }
 
 exports.addItem = function(req, res) {
-    const productToAdd = req.body;
+    const productToAdd = req.body.item;
     
     if(!productToAdd.prodNumber || !productToAdd.prodName || !productToAdd.prodPrice || !productToAdd.unitAmount) {
         return res.json({message: "Please enter all fields"});
@@ -85,17 +85,21 @@ exports.editItem = function(req, res) {
 }
 
 exports.removeItem = function(req, res) {
-    const inputProd = req.body;
-    if (inputProd.prodNumber) {
-        Product.deleteOne({ prodNumber: inputProd.prodNumber })
-            .then((result, err) =>{
-                if (result) {
-                    res.send(result);
-                } else {
-                    res.send(err);
-                }
-            })
+    if (req.body.role == "owner") {
+        const inputProd = req.body.item;
+        if (inputProd.prodNumber) {
+            Product.deleteOne({ prodNumber: inputProd.prodNumber })
+                .then((result, err) =>{
+                    if (result) {
+                        res.send(result);
+                    } else {
+                        res.send(err);
+                    }
+                })
+        } else {
+            return res.json({message: "Product with that product number not found"});
+        }
     } else {
-        return res.json({message: "Product with that product number not found"});
+        return res.json({message: "Insufficient access"})
     }
 }
