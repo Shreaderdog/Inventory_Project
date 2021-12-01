@@ -75,7 +75,7 @@ exports.editItem = function(req, res) {
                     prod.unitAmount = inputProd.unitAmount;
                 }
                 if (inputProd.stock) {
-                    prod.stock.set(store.toString(), inputProd.stock)
+                    prod.stock.set(store.toString(), Math.floor(inputProd.stock));
                 }
                 
                 prod.save();
