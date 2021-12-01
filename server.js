@@ -4,11 +4,11 @@ const express = require("express");  // express for routes
 const mongoose = require("mongoose");  // mongoose for db access
 const cors = require("cors");
 require("dotenv").config();  // dotenv for getting ENV variables from .env file
+const cookieParser = require("cookie-parser");
 
 // imports for self-made stuff
 const userRouter = require("./src/routes/users.js");
 const prodRouter = require("./src/routes/products.js");
-const cookieParser = require("cookie-parser");
 
 // initialize app
 const app = express();

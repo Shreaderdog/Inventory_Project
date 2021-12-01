@@ -47,7 +47,8 @@ class Products extends Component {
                 this.setState({
                     items: res.data
                 })
-            })
+            }
+        )
     }
     
     render() {
@@ -59,7 +60,7 @@ class Products extends Component {
                 <Container fluid className="h-100 w-100 centered ">
                     <div className="row align-items-center">
                         <div className = "mt-4 col align-self-center border border-secondary rounded-2 border-3">
-                            {this.state.items.map((item, i) => <Product key={i} propitem={item} propfunc={this.updateData} propperm={this.state.perms}/>)}
+                            {this.state.items.map((item, i) => <Product key={i+item.prodName+item.prodPrice+item.stock} propitem={item} propfunc={this.updateData.bind(this)} propperm={this.state.perms}/>)}
                         </div>
                     </div>
                 </Container>
